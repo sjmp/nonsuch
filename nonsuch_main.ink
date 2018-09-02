@@ -8,5 +8,10 @@
  
  === TheNorthGate ===
  Welcome to Nonsuch, the palace at the end of the world. 
- + Complete -> END
+ This is a massively multiplayer interactive fiction game.
+ + Complete -> Testing
+ + Another choice -> Testing
  
+ === Testing ===
+ This is a new ink file
+ + Complete -> END
