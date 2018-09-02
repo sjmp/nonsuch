@@ -67,12 +67,17 @@ return {
 
 export const commitEdit = editModel => {
 
+  //If edit model doesn't have any choices, throw error
+
+
+  //Turn it into a new ink json file that's linked to the previous ink file
+
   console.log(editModel);
   return loopObject();
 }
 
+//TODO - change the action to be more specific
 export const makeChoice = choice => {
-
   store.set('lastChoiceText', choice.text);
   ink.ChooseChoiceIndex(choice.index);
   return loopObject();
