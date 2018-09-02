@@ -8,6 +8,7 @@ export const INITIAL_STATE = {
 export default (state = INITIAL_STATE, { type, ...action }) => {
   switch (type) {
     case MAKE_CHOICE:
+    
       return {
         ...state,
         ...action

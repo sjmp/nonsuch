@@ -1,4 +1,5 @@
 import { Story } from "inkjs";
+import store from "store";
 import storyContent from "../nonsuch_main.json";
 
 export const ink = new Story(storyContent);
@@ -26,7 +27,22 @@ export const getTags = tags =>
   let currentTags = [];
 
 while (ink.canContinue) {
-    sceneText.push(ink.Continue());
+    var inkContinueText = ink.Continue();
+    var lastChoiceText = store.get('lastChoiceText');
+
+    if (inkContinueText.includes(lastChoiceText))
+    {
+      //push the store value
+      sceneText.push(lastChoiceText);
+
+      //trim the value from inkContinueText
+      inkContinueText = inkContinueText.replace(lastChoiceText,'')
+
+      //clear the store value
+      store.set('lastChoiceText', null);
+    }
+
+    sceneText.push(inkContinueText);
     currentTags = currentTags.concat(ink.currentTags);
   }
 
@@ -44,8 +60,10 @@ return {
   };
 };
 
-export const makeChoice = choiceIdx => {
-  ink.ChooseChoiceIndex(choiceIdx);
+export const makeChoice = choice => {
+
+  store.set('lastChoiceText', choice.text);
+  ink.ChooseChoiceIndex(choice.index);
   try {
     const gameData = gameLoop();
     return {

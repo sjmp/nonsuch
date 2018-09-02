@@ -6,7 +6,7 @@ const Choices = ({ choices, makeChoice }) => (
     <ul>
       {choices.map(choice => (
         <li key={choice.index}
-            onClick={() => makeChoice(choice.index)}>
+            onClick={() => makeChoice(choice)}>
           {choice.text}
         </li>
       ))}
