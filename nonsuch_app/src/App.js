@@ -2,16 +2,21 @@ import React from "react";
 import { connect } from "react-redux";
 import Choices from "./Choices";
 import Story from "./Story";
-import { makeChoice } from "./state/actions";
+import Editor from "./Editor";
+import { makeChoice, commitEdit } from "./state/actions";
 import "./App.css";
 
-const App = props =>
-  props.ending ? (
-    <div className="ending">Now write your own story</div>
-  ) : (
+const App = props => (
     <div className="App">
-      <Story sceneText={props.sceneText} />
-      <Choices choices={props.currentChoices} makeChoice={props.makeChoice} />
+      { props.ending ?
+        <Editor commitEdit = {props.commitEdit}/>
+      :
+        <div>
+        <Story sceneText={props.sceneText} />
+        <Choices choices={props.currentChoices} makeChoice={props.makeChoice} />
+        </div>
+      }
+
     </div>
   );
 
@@ -23,7 +28,8 @@ const App = props =>
 });
 
 const dispatchToProps = dispatch => ({
-  makeChoice: idx => dispatch(makeChoice(idx))
+  makeChoice: idx => dispatch(makeChoice(idx)),
+  commitEdit: idx => dispatch(commitEdit(idx))
 });
 
 export default connect(stateToProps, dispatchToProps)(App);

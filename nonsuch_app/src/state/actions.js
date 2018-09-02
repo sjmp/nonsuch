@@ -5,22 +5,23 @@ import storyContent from "../nonsuch_main.json";
 export const ink = new Story(storyContent);
 
 export const MAKE_CHOICE = "MAKE_CHOICE";
-
-export const getGlobalVars = variablesState =>
-  Object.keys(variablesState._globalVariables).reduce(
-    (acc, key) => ({
-      ...acc,
-      [key]: variablesState[key]
-    }),
-    {}
-  );
-
-export const getTags = tags =>
-  tags.reduce(
-    (acc, tag) => ({ ...acc,
-      [tag.split(": ")[0]]: tag.split(": ")[1] }),
-    {}
-  );
+export const COMMIT_EDIT = "COMMIT_EDIT"
+//
+// export const getGlobalVars = variablesState =>
+//   Object.keys(variablesState._globalVariables).reduce(
+//     (acc, key) => ({
+//       ...acc,
+//       [key]: variablesState[key]
+//     }),
+//     {}
+//   );
+//
+// export const getTags = tags =>
+//   tags.reduce(
+//     (acc, tag) => ({ ...acc,
+//       [tag.split(": ")[0]]: tag.split(": ")[1] }),
+//     {}
+//   );
 
   export const gameLoop = () => {
   const sceneText = [];
@@ -46,24 +47,39 @@ while (ink.canContinue) {
     currentTags = currentTags.concat(ink.currentTags);
   }
 
-const { currentChoices, variablesState } = ink;
+const { currentChoices,
+  // variablesState
+} = ink;
 
 if (!ink.canContinue && !currentChoices.length)
     throw new GameOverError("no more choices");
 
 return {
-    globals: getGlobalVars(variablesState),
-    tags: getTags(currentTags),
+    // globals: getGlobalVars(variablesState),
+    // tags: getTags(currentTags),
     currentChoices,
     sceneText,
     currentTags
   };
 };
 
+//-----------------------------------------------------------------------------
+
+export const commitEdit = editModel => {
+
+  console.log(editModel);
+  return loopObject();
+}
+
 export const makeChoice = choice => {
 
   store.set('lastChoiceText', choice.text);
   ink.ChooseChoiceIndex(choice.index);
+  return loopObject();
+};
+
+function loopObject()
+{
   try {
     const gameData = gameLoop();
     return {
@@ -81,7 +97,7 @@ export const makeChoice = choice => {
 
 throw e;
   }
-};
+}
 
 function GameOverError(reason = "", ...rest) {
   var instance = new Error(`Game Over, ${reason}`, ...rest);
