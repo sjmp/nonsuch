@@ -2,7 +2,7 @@ import { Story } from "inkjs";
 import store from "store";
 import storyContent from "../nonsuch_main.json";
 
-export const ink = new Story(storyContent);
+export var ink = new Story(storyContent);
 
 export const MAKE_CHOICE = "MAKE_CHOICE";
 export const COMMIT_EDIT = "COMMIT_EDIT"
@@ -23,11 +23,11 @@ export const COMMIT_EDIT = "COMMIT_EDIT"
 //     {}
 //   );
 
-  export const gameLoop = () => {
+export const gameLoop = () => {
   const sceneText = [];
   let currentTags = [];
 
-while (ink.canContinue) {
+  while (ink.canContinue) {
     var inkContinueText = ink.Continue();
     var lastChoiceText = store.get('lastChoiceText');
 
@@ -71,6 +71,9 @@ export const commitEdit = editModel => {
 
 
   //Turn it into a new ink json file that's linked to the previous ink file
+
+  //TODO - Fetch the new Story from the server
+  ink = new Story(storyContent);
 
   console.log(editModel);
   return loopObject();

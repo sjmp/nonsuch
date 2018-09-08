@@ -4,13 +4,12 @@
  * 2018 Samuel Partridge (@samuelpartridge)
  */
  
- -> TheNorthGate
+ -> Liam
  
- === TheNorthGate ===
+ === Liam ===
  Welcome to Nonsuch, the palace at the end of the world. 
  This is a massively multiplayer interactive fiction game.
- + Complete -> Testing
- + Another choice -> Testing
+ + COMPLTEE -> Testing
  
  === Testing ===
  This is a new ink file

@@ -1,4 +1,6 @@
 import React from "react";
+import Dropzone from 'react-dropzone';
+
 
 class Editor extends React.Component {
   constructor(props) {
@@ -13,12 +15,29 @@ class Editor extends React.Component {
     this.setState({value: event.target.value});
 }
 
+onDrop(accepted, rejected)
+{
+  if (rejected.length > 0)
+  {
+    window.alert("Incorrect format! Please upload a JSON file.");
+  }
+
+  console.log(accepted[0]);
+
+
+}
+
 render(){
     return (
       <section className="editor">
         <div>EDITING</div>
-        <p><textarea value={this.state.value} onChange={this.handleChange}> </textarea></p>
-        <p>Choice <input type="text"></input></p>
+        <div className="dropzone">
+          <Dropzone
+            accept="application/json"
+            onDrop={(accepted, rejected) => { this.onDrop(accepted, rejected); }}>
+              <p>Try dropping some files here, or click to select files to upload.</p>
+          </Dropzone>
+        </div>
         <section className="choices">
           <ul>
             <li onClick={() => this.props.commitEdit(this.state.value)}>SUBMIT</li>
@@ -28,5 +47,6 @@ render(){
     )
   }
 }
+
 
 export default Editor;
