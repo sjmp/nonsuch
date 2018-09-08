@@ -4,6 +4,8 @@
  * 2018 Samuel Partridge (@samuelpartridge)
  */
  
+ INCLUDE Test/Testing
+ 
  -> Liam
  
  === Liam ===
@@ -11,6 +13,3 @@
  This is a massively multiplayer interactive fiction game.
  + COMPLTEE -> Testing
  
- === Testing ===
- This is a new ink file
- + Complete -> END

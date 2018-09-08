@@ -22,7 +22,30 @@ onDrop(accepted, rejected)
     window.alert("Incorrect format! Please upload a JSON file.");
   }
 
-  console.log(accepted[0]);
+  const reader = new FileReader();
+
+  reader.onload = () => {
+      const fileAsBinaryString = reader.result;
+
+      //Remove fluff
+      var t = fileAsBinaryString.substr(3);
+
+      //parse into Json
+      var b = JSON.parse(t);
+
+      //If there's an Inkversion it's likely Ink!
+      //TODO: Clean the hell of out this.
+      if ('inkVersion' in b)
+      {
+          console.log(b);
+      }
+
+
+  };
+  reader.onabort = () => console.log('file reading was aborted');
+  reader.onerror = () => console.log('file reading has failed');
+
+  reader.readAsBinaryString(accepted[0]);
 
 
 }
